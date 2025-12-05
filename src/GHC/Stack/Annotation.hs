@@ -53,8 +53,10 @@ import GHC.Stack.Annotation.Experimental (
   )
 #else
 
--- The following source code is a 1:1 copy of ghc-experimental:
+-- The following source code is a copy of ghc-experimental:
 --  GHC.Stack.Annotation.Experimental.hs
+-- The only difference is that no 'annotateStackIO' is simply the 'id' function.
+--
 -- As such, we reproduce the copyright notice here.
 
 -- Copyright (c) 2023, ghc-devs@haskell.org
@@ -205,7 +207,6 @@ annotateStackShow ann =
 -- information to stack traces.
 annotateStackIO :: forall a b . (Typeable a, StackAnnotation a) => a -> IO b -> IO b
 annotateStackIO _ann = id
-{-# NOINLINE annotateStackIO #-}
 
 -- | @'annotateStackStringIO' msg b@ annotates the evaluation stack of @b@
 -- with the value @msg@.
