@@ -2,16 +2,18 @@ cabal-version: 3.8
 name: ghc-stack-annotations
 version: 0.1.0.0
 synopsis: RTS Callstack annotation library
-description: A compatibility library for the RTS Callstack annotations introduced in GHC 9.14.
-             .
-             Allows you to use the stack annotations without having to worry about older GHC versions.
-             As stack annotations rely on the newly introduced 'AnnFrame' stack frame type, this library
-             is operationally a NO-OP for GHC versions below 9.14.
-             .
-             For GHC <9.14, this library exposes an API identical to 'GHC.Stack.Annotation.Experimental' including
-             data types and type classes for writing 'StackAnnotation' instances, without worrying about backwards
-             compatibility.
-             For GHC >=9.14, this library re-exports the API of 'GHC.Stack.Annotation.Experimental'.
+description:
+  A compatibility library for the RTS Callstack annotations introduced in GHC 9.14.
+  .
+  Allows you to use the stack annotations without having to worry about older GHC versions.
+  As stack annotations rely on the newly introduced 'AnnFrame' stack frame type, this library
+  is operationally a NO-OP for GHC versions below 9.14.
+  .
+  For GHC <9.14, this library exposes an API identical to 'GHC.Stack.Annotation.Experimental' including
+  data types and type classes for writing 'StackAnnotation' instances, without worrying about backwards
+  compatibility.
+  For GHC >=9.14, this library re-exports the API of 'GHC.Stack.Annotation.Experimental'.
+
 category: development, BSD
 license: BSD-3-Clause
 license-file: LICENSE
@@ -22,7 +24,7 @@ extra-doc-files:
   CHANGELOG.md
   README.md
 
-tested-with: GHC ==9.14 || ==9.12 || ==9.10 || ==9.8
+tested-with: ghc ==9.14 || ==9.12 || ==9.10 || ==9.8
 
 common warnings
   ghc-options: -Wall
@@ -35,14 +37,18 @@ common exts
 
 library
   import: warnings, exts
-  exposed-modules: GHC.Stack.Annotation
+  exposed-modules:
+    GHC.Stack.Annotation
+    GHC.Stack.Annotation.UnliftIO
+
   build-depends:
     base >=4.19.1 && <5,
+    unliftio-core >=0.1 && <0.3,
 
   if impl(ghc >=9.14)
     build-depends:
-      ghc-internal >= 9.1400 && <10,
-      ghc-experimental >= 9.1400.0 && <10,
+      ghc-experimental >=9.1400.0 && <10,
+      ghc-internal >=9.1400 && <10,
   hs-source-dirs: src
   default-language: Haskell2010
 
