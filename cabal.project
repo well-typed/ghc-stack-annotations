@@ -1,1 +1,6 @@
 packages: .
+
+if impl(ghc >= 10.1)
+    -- required due to `tagged +template-haskell => template-haskell>=2.11 && <2.25`
+    allow-newer:
+        template-haskell,
