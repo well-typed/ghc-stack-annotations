@@ -27,6 +27,8 @@ build-type: Simple
 extra-doc-files:
   CHANGELOG.md
   README.md
+extra-source-files:
+  cbits/macros.h
 
 tested-with: ghc ==10.1 || ==9.14 || ==9.12 || ==9.10 || ==9.8
 
