@@ -1,6 +1,6 @@
 cabal-version: 3.8
 name: ghc-stack-annotations
-version: 0.1.0.0
+version: 0.2.0.0
 synopsis: RTS Callstack annotation library
 description:
   A compatibility library for the RTS Callstack annotations introduced in GHC 9.14.
@@ -9,10 +9,14 @@ description:
   As stack annotations rely on the newly introduced 'AnnFrame' stack frame type, this library
   is operationally a NO-OP for GHC versions below 9.14.
   .
-  For GHC <9.14, this library exposes an API identical to 'GHC.Stack.Annotation.Experimental' including
-  data types and type classes for writing 'StackAnnotation' instances, without worrying about backwards
-  compatibility.
-  For GHC >=9.14, this library re-exports the API of 'GHC.Stack.Annotation.Experimental'.
+  For GHC <9.14, this library exposes an API identical to 'GHC.Stack.Annotation.Experimental' of the latest
+  supported GHC version.
+  For GHC >=9.14, this library exposes an API identical to 'GHC.Stack.Annotation.Experimental' of the latest
+  supported GHC version.
+  For the latest supported GHC version, we re-export the interface of 'GHC.Stack.Annotation.Experimental'
+  .
+  This API abstracts over the GHC 'StackAnnotation' type class, thus allows you to write instances for all
+  supported GHC versions without any @-XCPP@.
 
 category: development, BSD
 license: BSD-3-Clause
